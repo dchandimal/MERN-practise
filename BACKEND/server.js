@@ -1,6 +1,7 @@
 // Import necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
+
 require("dotenv").config(); // Load environment variables from .env file
 
 // Create an instance of Express
@@ -29,7 +30,7 @@ app.get("/", (req, res) => {
   res.send("API is working!");
 });
 
-const studentRouter = require("./routes/student.js");
+const studentRouter = require("./routes/students.js");
 
 //http:localhost:8070/student will redirect to routes/student.js by below line
 app.use("/student", studentRouter);

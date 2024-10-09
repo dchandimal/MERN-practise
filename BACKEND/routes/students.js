@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { status } = require("express/lib/response");
 let Student = require("../models/Student");
 
 //if call http//localhost:8070/student/add backend URL, will redirect to inserting a user
@@ -50,13 +51,45 @@ router.route("/update/:id").put(async (req, res) => {
 
   const update = await Student.findByIdAndUpdate(userId, updateStudent)
     .then(() => {
-      res.status(200).send({ status: "User Updated", user: update });
+      res.status(200).send({ status: "User Updated" });
     })
     .catch((err) => {
       console.log(err);
       res
         .status(500)
         .send({ status: "Error with updating data", error: err.message });
+    });
+});
+
+//delete a user
+router.route("/delete/:id").delete(async (req, res) => {
+  let userId = req.params.id;
+
+  await Student.findByIdAndDelete(userId)
+    .then(() => {
+      res.status(200).send({ status: "User Deleted" });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res
+        .status(500)
+        .send({ status: "Error with delete user", error: err.message });
+    });
+});
+
+//get single user
+router.route("/get/:id").get(async (req, res) => {
+  let userId = req.params.id;
+
+  const user = await Student.findById(userId)
+    .then((student) => {
+      res.status(200).send({ status: "User fetched", student });
+    })
+    .catch((err) => {
+      console.log(err.message);
+      res
+        .status(500)
+        .send({ status: "Error with get user", error: err.message });
     });
 });
 
