@@ -1,11 +1,14 @@
 // Import necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 require("dotenv").config(); // Load environment variables from .env file
 
 // Create an instance of Express
 const app = express();
+
+app.use(cors());
 
 // Middleware to parse JSON
 app.use(express.json());
