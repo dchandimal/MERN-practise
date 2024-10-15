@@ -4,7 +4,7 @@
   "description": "career path system",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node --watch-path ./ server.js",
     "dev": "nodemon server.js"
   },
   "author": "Dinusha and Shankaran",
